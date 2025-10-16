@@ -1,0 +1,95 @@
+//
+//  DashboardView.swift
+//  PoolSensors
+//
+//  Created by Julien Heinen on 15/10/2025.
+//
+
+import SwiftUI
+
+struct DashboardView: View {
+    @EnvironmentObject var viewModel: AppViewModel
+    @State private var showServerSelector = false
+    @State private var showDeviceSelector = false
+    @State private var showDeviceSettings = false
+    
+    var body: some View {
+        NavigationView {
+            ScrollView {
+                VStack(spacing: 20) {
+                    // Bannière du serveur connecté (en haut)
+                    ConnectedServerBanner(server: viewModel.currentServer) {
+                        showServerSelector = true
+                    }
+                    
+                    // En-tête avec info du capteur sélectionné (cliquable)
+                    if let device = viewModel.selectedDevice {
+                        DeviceHeaderCard(device: device) {
+                            showDeviceSelector = true
+                        }
+                    } else if viewModel.currentServer != nil {
+                        // Aucun périphérique sélectionné mais serveur actif
+                        NoDeviceSelectedCard {
+                            showDeviceSelector = true
+                        }
+                    }
+                    
+                    // Grille de capteurs
+                    LazyVGrid(columns: [
+                        GridItem(.flexible()),
+                        GridItem(.flexible())
+                    ], spacing: 16) {
+                        ForEach(viewModel.currentReadings) { reading in
+                            SensorCard(reading: reading)
+                        }
+                    }
+                    .padding(.horizontal)
+                    
+                    // Section graphiques (à implémenter)
+                    VStack(alignment: .leading, spacing: 12) {
+                        Text("Historique")
+                            .font(.headline)
+                            .padding(.horizontal)
+                        
+                        ChartPlaceholder()
+                    }
+                    
+                    Spacer(minLength: 20)
+                }
+                .padding(.top)
+            }
+            .navigationTitle("Dashboard")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: {
+                        if viewModel.selectedDevice != nil {
+                            showDeviceSettings = true
+                        }
+                    }) {
+                        Image(systemName: "slider.horizontal.3")
+                            .foregroundColor(viewModel.selectedDevice != nil ? .blue : .gray)
+                    }
+                    .disabled(viewModel.selectedDevice == nil)
+                }
+            }
+            .sheet(isPresented: $showServerSelector) {
+                ServerSelectorView()
+            }
+            .sheet(isPresented: $showDeviceSelector) {
+                DeviceSelectorView()
+            }
+            .sheet(isPresented: $showDeviceSettings) {
+                if let device = viewModel.selectedDevice {
+                    NavigationView {
+                        DeviceSettingsView(device: device)
+                    }
+                }
+            }
+        }
+    }
+}
+
+#Preview {
+    DashboardView()
+        .environmentObject(AppViewModel())
+}
