@@ -12,6 +12,7 @@ struct DashboardView: View {
     @State private var showServerSelector = false
     @State private var showDeviceSelector = false
     @State private var showDeviceSettings = false
+    @State private var isRefreshing = false
     
     var body: some View {
         NavigationView {
@@ -58,6 +59,9 @@ struct DashboardView: View {
                 }
                 .padding(.top)
             }
+            .refreshable {
+                await refreshData()
+            }
             .navigationTitle("Dashboard")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -86,6 +90,20 @@ struct DashboardView: View {
                 }
             }
         }
+    }
+    
+    // MARK: - Actions
+    
+    private func refreshData() async {
+        isRefreshing = true
+        
+        // Forcer la reconnexion
+        viewModel.refreshConnection()
+        
+        // Attendre un peu pour laisser le temps de la reconnexion
+        try? await Task.sleep(nanoseconds: 1_500_000_000) // 1.5 secondes
+        
+        isRefreshing = false
     }
 }
 

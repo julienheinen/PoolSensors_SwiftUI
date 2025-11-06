@@ -206,6 +206,29 @@ class AppViewModel: ObservableObject {
         saveData()
     }
     
+    func refreshConnection() {
+        print("🔄 Rafraîchissement de la connexion...")
+        
+        // Déconnecter puis reconnecter au serveur actuel
+        if let server = currentServer {
+            mqttService.disconnect()
+            
+            // Petite pause pour assurer la déconnexion propre
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                self.mqttService.connect(to: server)
+                
+                // Réabonner au topic du périphérique sélectionné
+                if let device = self.selectedDevice {
+                    self.mqttService.subscribe(to: device.mqttTopic)
+                }
+                
+                print("✅ Reconnexion effectuée")
+            }
+        } else {
+            print("⚠️ Aucun serveur connecté à rafraîchir")
+        }
+    }
+    
     func removeServer(_ server: MQTTServer) {
         servers.removeAll { $0.id == server.id }
         if currentServer?.id == server.id {

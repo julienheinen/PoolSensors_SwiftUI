@@ -8,13 +8,44 @@
 
 /* Begin PBXBuildFile section */
 		2784EEBD2EA04AB000B76027 /* CocoaMQTT in Frameworks */ = {isa = PBXBuildFile; productRef = 2784EE752EA04A1000B76027 /* CocoaMQTT */; };
+		27A5A75C2EA1985E0005DCFD /* PoolSensorsWatchOS Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 27A5A7522EA1985D0005DCFD /* PoolSensorsWatchOS Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		27A5A75A2EA1985E0005DCFD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 27FCAA8B2E9EB3D9008055AA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 27A5A7512EA1985D0005DCFD;
+			remoteInfo = "PoolSensorsWatchOS Watch App";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		27A5A6EB2EA1852A0005DCFD /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				27A5A75C2EA1985E0005DCFD /* PoolSensorsWatchOS Watch App.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		27A5A7522EA1985D0005DCFD /* PoolSensorsWatchOS Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PoolSensorsWatchOS Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		27FCAA932E9EB3D9008055AA /* PoolSensors.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PoolSensors.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		27A5A7532EA1985D0005DCFD /* PoolSensorsWatchOS Watch App */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "PoolSensorsWatchOS Watch App";
+			sourceTree = "<group>";
+		};
 		27FCAA952E9EB3D9008055AA /* PoolSensors */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = PoolSensors;
@@ -23,6 +54,13 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		27A5A74F2EA1985D0005DCFD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		27FCAA902E9EB3D9008055AA /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -34,10 +72,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		27A5A7032EA195DD0005DCFD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		27FCAA8A2E9EB3D9008055AA = {
 			isa = PBXGroup;
 			children = (
 				27FCAA952E9EB3D9008055AA /* PoolSensors */,
+				27A5A7532EA1985D0005DCFD /* PoolSensorsWatchOS Watch App */,
+				27A5A7032EA195DD0005DCFD /* Frameworks */,
 				27FCAA942E9EB3D9008055AA /* Products */,
 			);
 			sourceTree = "<group>";
@@ -46,6 +93,7 @@
 			isa = PBXGroup;
 			children = (
 				27FCAA932E9EB3D9008055AA /* PoolSensors.app */,
+				27A5A7522EA1985D0005DCFD /* PoolSensorsWatchOS Watch App.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -53,6 +101,28 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		27A5A7512EA1985D0005DCFD /* PoolSensorsWatchOS Watch App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 27A5A75D2EA1985E0005DCFD /* Build configuration list for PBXNativeTarget "PoolSensorsWatchOS Watch App" */;
+			buildPhases = (
+				27A5A74E2EA1985D0005DCFD /* Sources */,
+				27A5A74F2EA1985D0005DCFD /* Frameworks */,
+				27A5A7502EA1985D0005DCFD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				27A5A7532EA1985D0005DCFD /* PoolSensorsWatchOS Watch App */,
+			);
+			name = "PoolSensorsWatchOS Watch App";
+			packageProductDependencies = (
+			);
+			productName = "PoolSensorsWatchOS Watch App";
+			productReference = 27A5A7522EA1985D0005DCFD /* PoolSensorsWatchOS Watch App.app */;
+			productType = "com.apple.product-type.application";
+		};
 		27FCAA922E9EB3D9008055AA /* PoolSensors */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 27FCAA9E2E9EB3DA008055AA /* Build configuration list for PBXNativeTarget "PoolSensors" */;
@@ -60,10 +130,12 @@
 				27FCAA8F2E9EB3D9008055AA /* Sources */,
 				27FCAA902E9EB3D9008055AA /* Frameworks */,
 				27FCAA912E9EB3D9008055AA /* Resources */,
+				27A5A6EB2EA1852A0005DCFD /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				27A5A75B2EA1985E0005DCFD /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				27FCAA952E9EB3D9008055AA /* PoolSensors */,
@@ -86,6 +158,9 @@
 				LastSwiftUpdateCheck = 2600;
 				LastUpgradeCheck = 2600;
 				TargetAttributes = {
+					27A5A7512EA1985D0005DCFD = {
+						CreatedOnToolsVersion = 26.0.1;
+					};
 					27FCAA922E9EB3D9008055AA = {
 						CreatedOnToolsVersion = 26.0.1;
 					};
@@ -109,11 +184,19 @@
 			projectRoot = "";
 			targets = (
 				27FCAA922E9EB3D9008055AA /* PoolSensors */,
+				27A5A7512EA1985D0005DCFD /* PoolSensorsWatchOS Watch App */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		27A5A7502EA1985D0005DCFD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		27FCAA912E9EB3D9008055AA /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -124,6 +207,13 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		27A5A74E2EA1985D0005DCFD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		27FCAA8F2E9EB3D9008055AA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -133,7 +223,84 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		27A5A75B2EA1985E0005DCFD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 27A5A7512EA1985D0005DCFD /* PoolSensorsWatchOS Watch App */;
+			targetProxy = 27A5A75A2EA1985E0005DCFD /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		27A5A75E2EA1985E0005DCFD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6SD9YP3C88;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = PoolSensorsWatchOS;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "iut-nancy-brabois.PoolSensors";
+				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = NO;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "iut-nancy-brabois.PoolSensors.watchkitapp";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 26.0;
+			};
+			name = Debug;
+		};
+		27A5A75F2EA1985E0005DCFD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6SD9YP3C88;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = PoolSensorsWatchOS;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "iut-nancy-brabois.PoolSensors";
+				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = NO;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "iut-nancy-brabois.PoolSensors.watchkitapp";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				VALIDATE_PRODUCT = YES;
+				WATCHOS_DEPLOYMENT_TARGET = 26.0;
+			};
+			name = Release;
+		};
 		27FCAA9C2E9EB3DA008055AA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -341,6 +508,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		27A5A75D2EA1985E0005DCFD /* Build configuration list for PBXNativeTarget "PoolSensorsWatchOS Watch App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				27A5A75E2EA1985E0005DCFD /* Debug */,
+				27A5A75F2EA1985E0005DCFD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		27FCAA8E2E9EB3D9008055AA /* Build configuration list for PBXProject "PoolSensors" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

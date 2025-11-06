@@ -9,6 +9,8 @@ import SwiftUI
 
 @main
 struct PoolSensorsApp: App {
+    @StateObject private var viewModel = AppViewModel()
+    
     init() {
         // Demander l'autorisation pour les notifications au lancement
         NotificationService.shared.requestAuthorization()
@@ -17,6 +19,11 @@ struct PoolSensorsApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(viewModel)
+                .onAppear {
+                    // Configurer WatchConnectivity avec le ViewModel
+                    PhoneConnectivityManager.shared.configure(with: viewModel)
+                }
         }
     }
 }
