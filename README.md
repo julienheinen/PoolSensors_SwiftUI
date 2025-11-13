@@ -1,3 +1,7 @@
+<img width="128" height="128" alt="256x256 logo" src="https://github.com/user-attachments/assets/f865d827-914f-494f-8591-169af50c92c1" />
+<img width="128" height="128" alt="dark_1024x1024" src="https://github.com/user-attachments/assets/7f798b15-5257-48cf-82c4-aac98bff48c8" />
+
+
 # PoolSensors
 
 Application iOS et watchOS native pour la surveillance et la gestion de piscines connectées via MQTT.
@@ -74,6 +78,19 @@ Ce projet a été développé dans le cadre d'un projet de BUT 3ème année. Mon
 - Indicateur visuel d'état de connexion iPhone
 - Consultation rapide sans sortir le téléphone
 - Données de capteurs mises à jour en temps réel
+
+## Captures d'écran
+
+<img width="276" height="570" alt="image" src="https://github.com/user-attachments/assets/145a502d-4a33-4743-9e1c-776efd36a29a" />
+<img width="276" height="570" alt="image" src="https://github.com/user-attachments/assets/5b171744-cbfc-42eb-8e06-a73e22950fc5" />
+<img width="276" height="570" alt="image" src="https://github.com/user-attachments/assets/42117362-10b8-4a24-b49f-c9ad3a860009" />
+<img width="276" height="570" alt="image" src="https://github.com/user-attachments/assets/edeaf979-8492-4928-9f03-f9a022aa1b2b" />
+<img width="276" height="570" alt="image" src="https://github.com/user-attachments/assets/818068ca-9eb8-4a20-889a-1129102b638e" />
+<img width="276" height="570" alt="image" src="https://github.com/user-attachments/assets/54e5ad6a-71bc-427c-9c0d-d0b01c91f4fc" />
+
+
+
+
 
 ## Architecture technique
 
