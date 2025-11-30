@@ -56,7 +56,7 @@ class PhoneConnectivityManager: NSObject, ObservableObject {
             }
             .store(in: &cancellables)
         
-        viewModel.mqttService.$receivedData
+        viewModel.$receivedData
             .sink { [weak self] _ in
                 self?.sendSensorDataToWatch()
             }
@@ -111,13 +111,13 @@ class PhoneConnectivityManager: NSObject, ObservableObject {
     
     func sendSensorDataToWatch() {
         guard let viewModel = viewModel else { return }
-        guard let sensorData = viewModel.mqttService.receivedData else { return }
+        guard let sensorData = viewModel.receivedData else { return }
         guard WCSession.default.activationState == .activated else { return }
         
         let data: [String: Any] = [
             "id": sensorData.id.uuidString,
             "temperature": sensorData.temperature as Any,
-            "pH": sensorData.ph as Any,
+            "pH": sensorData.pH as Any,
             "chlorine": sensorData.chlorine as Any,
             "orp": sensorData.orp as Any,
             "timestamp": sensorData.timestamp.timeIntervalSince1970
