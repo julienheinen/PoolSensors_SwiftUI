@@ -81,14 +81,12 @@ Ce projet a été développé dans le cadre d'un projet de BUT 3ème année. Mon
 
 ## Captures d'écran
 
-<img width="276" height="570" alt="image" src="https://github.com/user-attachments/assets/145a502d-4a33-4743-9e1c-776efd36a29a" />
-<img width="276" height="570" alt="image" src="https://github.com/user-attachments/assets/5b171744-cbfc-42eb-8e06-a73e22950fc5" />
-<img width="276" height="570" alt="image" src="https://github.com/user-attachments/assets/42117362-10b8-4a24-b49f-c9ad3a860009" />
-<img width="276" height="570" alt="image" src="https://github.com/user-attachments/assets/edeaf979-8492-4928-9f03-f9a022aa1b2b" />
-<img width="276" height="570" alt="image" src="https://github.com/user-attachments/assets/818068ca-9eb8-4a20-889a-1129102b638e" />
-<img width="276" height="570" alt="image" src="https://github.com/user-attachments/assets/54e5ad6a-71bc-427c-9c0d-d0b01c91f4fc" />
-
-
+<img width="276" height="570" alt="Capture écran Dashboard" src="https://github.com/user-attachments/assets/317915e3-fb24-432d-b7a7-36bc0597969c" />
+<img width="276" height="570" alt="Capture écran Historique" src="https://github.com/user-attachments/assets/cbba9c55-7f8d-409c-ad05-790c329af25b" />
+<img width="276" height="570" alt="Capture écran Capteurs" src="https://github.com/user-attachments/assets/ed569863-19d3-403a-b215-d018697c64c1" />
+<img width="276" height="570" alt="Capture écran gestion" src="https://github.com/user-attachments/assets/818068ca-9eb8-4a20-889a-1129102b638e" />
+<img width="276" height="570" alt="Capture écran Paramètres" src="https://github.com/user-attachments/assets/5b171744-cbfc-42eb-8e06-a73e22950fc5" />
+<img width="276" height="570" alt="Capture écran notifications" src="https://github.com/user-attachments/assets/54e5ad6a-71bc-427c-9c0d-d0b01c91f4fc" />
 
 
 
