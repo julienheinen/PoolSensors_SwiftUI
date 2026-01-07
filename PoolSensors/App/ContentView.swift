@@ -18,10 +18,10 @@ struct ContentView: View {
                     Label("Dashboard", systemImage: "chart.bar.fill")
                 }
             
-            // Historique des données
-            HistoryView()
+            // Discussion / Assistant
+            AssistantView()
                 .tabItem {
-                    Label("Historique", systemImage: "clock.arrow.circlepath")
+                    Label("Assistant", systemImage: "bubble.left.and.bubble.right.fill")
                 }
             
             // Sélection de périphérique

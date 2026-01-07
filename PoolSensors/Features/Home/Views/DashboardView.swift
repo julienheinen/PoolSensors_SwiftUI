@@ -46,13 +46,13 @@ struct DashboardView: View {
                     }
                     .padding(.horizontal)
                     
-                    // Section graphiques (à implémenter)
+                    // Section graphiques
                     VStack(alignment: .leading, spacing: 12) {
-                        Text("Historique")
+                        Text("Graphiques")
                             .font(.headline)
                             .padding(.horizontal)
-                        
-                        ChartPlaceholder()
+
+                        HistoryChartsView(history: viewModel.sensorData)
                     }
                     
                     Spacer(minLength: 20)

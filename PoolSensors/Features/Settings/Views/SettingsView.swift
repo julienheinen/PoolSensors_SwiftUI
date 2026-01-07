@@ -11,6 +11,11 @@ struct SettingsView: View {
     @EnvironmentObject var viewModel: AppViewModel
     @AppStorage("temperatureUnit") private var temperatureUnit: String = "celsius"
     @AppStorage("dataRetentionDays") private var dataRetentionDays: Double = 30
+    @AppStorage("poolVolumeM3") private var poolVolumeM3: Double = 30
+    @AppStorage("availableChlorinePercent") private var availableChlorinePercent: Double = 65
+    @AppStorage("phPlusDoseGPer10m3Per0_1") private var phPlusDoseGPer10m3Per0_1: Double = 150
+    @AppStorage("phMinusDoseGPer10m3Per0_1") private var phMinusDoseGPer10m3Per0_1: Double = 150
+    @AppStorage("assistantRulesURL") private var assistantRulesURL: String = ""
     
     @State private var showClearDataAlert = false
     @State private var showExportSheet = false
@@ -53,6 +58,79 @@ struct SettingsView: View {
                 Button(action: { showClearDataAlert = true }) {
                     Text("Effacer toutes les données")
                         .foregroundColor(.red)
+                }
+            }
+
+            // Assistant
+            Section(header: Text("Assistant")) {
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("Volume de la piscine")
+                        .font(.subheadline)
+
+                    HStack {
+                        Slider(value: $poolVolumeM3, in: 1...200, step: 0.5)
+                        Text("\(poolVolumeM3, specifier: "%.1f") m³")
+                            .frame(width: 80)
+                            .foregroundColor(.secondary)
+                    }
+                }
+
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("Chlore actif (produit)")
+                        .font(.subheadline)
+
+                    HStack {
+                        Slider(value: $availableChlorinePercent, in: 10...100, step: 1)
+                        Text("\(Int(availableChlorinePercent))%")
+                            .frame(width: 60)
+                            .foregroundColor(.secondary)
+                    }
+
+                    Text("Ex: dichlore ~56%, hypochlorite calcium ~65%, trichlore ~90%")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                }
+
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("Dosage pH+ (standard)")
+                        .font(.subheadline)
+
+                    HStack {
+                        Slider(value: $phPlusDoseGPer10m3Per0_1, in: 50...300, step: 10)
+                        Text("\(Int(phPlusDoseGPer10m3Per0_1)) g")
+                            .frame(width: 60)
+                            .foregroundColor(.secondary)
+                    }
+                    Text("g pour 10 m³ et +0.1 pH (à adapter selon votre produit)")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                }
+
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("Dosage pH- (standard)")
+                        .font(.subheadline)
+
+                    HStack {
+                        Slider(value: $phMinusDoseGPer10m3Per0_1, in: 50...300, step: 10)
+                        Text("\(Int(phMinusDoseGPer10m3Per0_1)) g")
+                            .frame(width: 60)
+                            .foregroundColor(.secondary)
+                    }
+                    Text("g pour 10 m³ et -0.1 pH (à adapter selon votre produit)")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                }
+
+                VStack(alignment: .leading, spacing: 6) {
+                    Text("Source des règles (optionnel)")
+                        .font(.subheadline)
+                    TextField("https://.../rules.json", text: $assistantRulesURL)
+                        .textInputAutocapitalization(.never)
+                        .autocorrectionDisabled(true)
+                        .keyboardType(.URL)
+                    Text("Si renseignée, l'app peut récupérer des règles depuis Internet.")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
                 }
             }
             

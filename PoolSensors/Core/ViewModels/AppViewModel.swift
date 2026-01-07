@@ -59,43 +59,50 @@ class AppViewModel: ObservableObject {
         
         DispatchQueue.main.async {
             // Mettre à jour les lectures actuelles
-            self.currentReadings = [
-                SensorReading(
-                    name: "Température",
-                    value: String(format: "%.1f", sensorData.temperature),
-                    unit: "°C",
-                    status: self.temperatureStatus(sensorData.temperature),
-                    icon: "thermometer"
-                ),
-                SensorReading(
-                    name: "pH",
-                    value: String(format: "%.1f", sensorData.ph),
-                    unit: "",
-                    status: self.phStatus(sensorData.ph),
-                    icon: "drop.fill"
-                ),
-                SensorReading(
-                    name: "Chlore",
-                    value: String(format: "%.1f", sensorData.chlorine),
-                    unit: "mg/L",
-                    status: self.chlorineStatus(sensorData.chlorine),
-                    icon: "circle.hexagongrid.fill"
-                ),
-                SensorReading(
-                    name: "ORP",
-                    value: String(format: "%.0f", sensorData.orp),
-                    unit: "mV",
-                    status: self.orpStatus(sensorData.orp),
-                    icon: "waveform.path.ecg"
-                )
-            ]
+            self.currentReadings = self.readings(from: sensorData)
             
             print("✅ Interface mise à jour avec \(self.currentReadings.count) lectures")
             
             // Ajouter aux données historiques
             self.sensorData.append(sensorData)
             print("📊 \(self.sensorData.count) mesure(s) dans l'historique")
+
+            // Persister l'historique
+            self.saveData()
         }
+    }
+
+    private func readings(from sensorData: PoolSensorData) -> [SensorReading] {
+        [
+            SensorReading(
+                name: "Température",
+                value: String(format: "%.1f", sensorData.temperature),
+                unit: "°C",
+                status: temperatureStatus(sensorData.temperature),
+                icon: "thermometer"
+            ),
+            SensorReading(
+                name: "pH",
+                value: String(format: "%.1f", sensorData.ph),
+                unit: "",
+                status: phStatus(sensorData.ph),
+                icon: "drop.fill"
+            ),
+            SensorReading(
+                name: "Chlore",
+                value: String(format: "%.1f", sensorData.chlorine),
+                unit: "mg/L",
+                status: chlorineStatus(sensorData.chlorine),
+                icon: "circle.hexagongrid.fill"
+            ),
+            SensorReading(
+                name: "ORP",
+                value: String(format: "%.0f", sensorData.orp),
+                unit: "mV",
+                status: orpStatus(sensorData.orp),
+                icon: "waveform.path.ecg"
+            )
+        ]
     }
     
     private func updateDeviceStatus(isActive: Bool) {
@@ -244,6 +251,8 @@ class AppViewModel: ObservableObject {
     private let devicesKey = "pool_devices"
     private let selectedDeviceIDKey = "selected_device_id"
     private let currentServerIDKey = "current_server_id"
+    private let sensorDataKey = "sensor_data_history"
+    private let dataRetentionDaysKey = "dataRetentionDays"
     
     func saveData() {
         let encoder = JSONEncoder()
@@ -275,6 +284,13 @@ class AppViewModel: ObservableObject {
         } else {
             UserDefaults.standard.removeObject(forKey: currentServerIDKey)
         }
+
+        // Appliquer la rétention puis sauvegarder l'historique des mesures
+        pruneSensorHistoryIfNeeded()
+        if let sensorDataEncoded = try? encoder.encode(sensorData) {
+            UserDefaults.standard.set(sensorDataEncoded, forKey: sensorDataKey)
+            print("💾 Historique: \(sensorData.count) mesure(s) sauvegardée(s)")
+        }
         
         UserDefaults.standard.synchronize()
         print("✅ Données sauvegardées avec succès")
@@ -282,6 +298,21 @@ class AppViewModel: ObservableObject {
     
     func loadData() {
         let decoder = JSONDecoder()
+
+        // Charger l'historique des mesures
+        if let historyData = UserDefaults.standard.data(forKey: sensorDataKey),
+           let loadedHistory = try? decoder.decode([PoolSensorData].self, from: historyData) {
+            sensorData = loadedHistory
+            pruneSensorHistoryIfNeeded()
+            print("📂 Historique chargé: \(sensorData.count) mesure(s)")
+
+            // Restaurer les cards à partir de la dernière mesure connue
+            if let lastMeasurement = sensorData.last {
+                currentReadings = readings(from: lastMeasurement)
+            }
+        } else {
+            print("📂 Aucun historique sauvegardé")
+        }
         
         // Charger les serveurs MQTT
         if let serversData = UserDefaults.standard.data(forKey: serversKey),
@@ -323,6 +354,19 @@ class AppViewModel: ObservableObject {
             }
         }
     }
+
+    private func pruneSensorHistoryIfNeeded() {
+        let retentionDays = max(1, UserDefaults.standard.double(forKey: dataRetentionDaysKey))
+        guard retentionDays > 0 else { return }
+
+        let cutoff = Calendar.current.date(byAdding: .day, value: -Int(retentionDays), to: Date()) ?? Date()
+        let beforeCount = sensorData.count
+        sensorData.removeAll { $0.timestamp < cutoff }
+
+        if beforeCount != sensorData.count {
+            print("🧹 Historique: \(beforeCount - sensorData.count) mesure(s) supprimée(s) (rétention \(Int(retentionDays))j)")
+        }
+    }
     
     /// Effacer toutes les données sauvegardées
     func clearAllData() {
@@ -330,12 +374,15 @@ class AppViewModel: ObservableObject {
         UserDefaults.standard.removeObject(forKey: devicesKey)
         UserDefaults.standard.removeObject(forKey: selectedDeviceIDKey)
         UserDefaults.standard.removeObject(forKey: currentServerIDKey)
+        UserDefaults.standard.removeObject(forKey: sensorDataKey)
         UserDefaults.standard.synchronize()
         
         servers = []
         devices = []
         selectedDevice = nil
         currentServer = nil
+        sensorData = []
+        currentReadings = []
         
         print("🗑️ Toutes les données ont été effacées")
     }
