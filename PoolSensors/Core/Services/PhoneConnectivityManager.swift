@@ -55,12 +55,6 @@ class PhoneConnectivityManager: NSObject, ObservableObject {
                 self?.sendDataToWatch()
             }
             .store(in: &cancellables)
-        
-        viewModel.$receivedData
-            .sink { [weak self] _ in
-                self?.sendSensorDataToWatch()
-            }
-            .store(in: &cancellables)
     }
     
     // MARK: - Send Data to Watch
@@ -111,13 +105,13 @@ class PhoneConnectivityManager: NSObject, ObservableObject {
     
     func sendSensorDataToWatch() {
         guard let viewModel = viewModel else { return }
-        guard let sensorData = viewModel.receivedData else { return }
+        guard let sensorData = viewModel.sensorData.last else { return }
         guard WCSession.default.activationState == .activated else { return }
         
         let data: [String: Any] = [
             "id": sensorData.id.uuidString,
             "temperature": sensorData.temperature as Any,
-            "pH": sensorData.pH as Any,
+            "ph": sensorData.ph as Any,
             "chlorine": sensorData.chlorine as Any,
             "orp": sensorData.orp as Any,
             "timestamp": sensorData.timestamp.timeIntervalSince1970
